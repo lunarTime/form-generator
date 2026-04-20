@@ -23,7 +23,7 @@
     )
 
     const emit = defineEmits<{
-        (e: 'update:modelValue', value: any): void
+        (e: 'update:modelValue', value: string | number | boolean): void
         (e: 'blur'): void
         (e: 'focus'): void
     }>()
@@ -40,7 +40,7 @@
         'ui-field--required': props.required
     }))
 
-    const handleUpdate = (value: any) => {
+    const handleUpdate = (value: string | number | boolean) => {
         if (!props.disabled && !props.readonly) {
             emit('update:modelValue', value)
         }
