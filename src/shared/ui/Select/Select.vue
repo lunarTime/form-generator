@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import type { SelectOption } from '@/shared/types/form'
 
-    const props = defineProps<{
+    defineProps<{
         modelValue?: string | number
         options?: SelectOption[]
         placeholder?: string
