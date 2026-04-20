@@ -11,6 +11,6 @@ export function escapeHtml(text: string): string {
     return String(text).replace(/[&<>"'/]/g, char => map[char] ?? char)
 }
 
-export function sanitizeString(value: any): string {
+export function sanitizeString(value: unknown): string {
     return String(value ?? '').replace(/<[^>]*>/g, '')
 }
