@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { sanitizeString } from '@/shared/lib/sanitize'
 
-    const props = withDefaults(
+    withDefaults(
         defineProps<{
             modelValue?: string
             placeholder?: string
