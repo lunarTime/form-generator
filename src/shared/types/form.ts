@@ -19,4 +19,4 @@ export interface FormField {
     checkboxLabel?: string
 }
 
-export type FormData = Record<string, any>
+export type FormData = Record<string, string | number | boolean | undefined | null>
