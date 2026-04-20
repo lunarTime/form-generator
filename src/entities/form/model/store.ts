@@ -1,9 +1,6 @@
-import { createStore } from 'vuex'
+import { createStore, type ActionContext } from 'vuex'
 import { sanitizeString } from '@/shared/lib/sanitize'
-
-export interface FormData {
-    [key: string]: unknown
-}
+import type { FormData } from '@/shared/types/form'
 
 export interface State {
     savedForms: {
@@ -36,7 +33,7 @@ export default createStore<State>({
         }
     },
     actions: {
-        saveForm({ commit }: { commit: Function }, payload: { formName: string; data: FormData }) {
+        saveForm({ commit }: ActionContext<State, State>, payload: { formName: string; data: FormData }) {
             const sanitized: FormData = {}
 
             for (const [key, value] of Object.entries(payload.data)) {
@@ -54,7 +51,7 @@ export default createStore<State>({
                 console.error('Ошибка сохранения формы:', e)
             }
         },
-        loadForm({ commit }: { commit: Function }, formName: string) {
+        loadForm({ commit }: ActionContext<State, State>, formName: string) {
             try {
                 const saved = localStorage.getItem(`form_${formName}`)
 
@@ -72,7 +69,7 @@ export default createStore<State>({
                 console.error('Ошибка загрузки формы:', e)
             }
         },
-        clearForm({ commit }: { commit: Function }, formName: string) {
+        clearForm({ commit }: ActionContext<State, State>, formName: string) {
             commit('CLEAR_FORM', formName)
 
             try {
