@@ -17,7 +17,7 @@
         (e: 'cancel'): void
     }>()
 
-    const updateField = (fieldName: string, value: any) => {
+    const updateField = (fieldName: string, value: string | number | boolean) => {
         emit('update:modelValue', {
             ...props.modelValue,
             [fieldName]: value
@@ -52,7 +52,7 @@
                     :name="`field-${field.name}`"
                     :field="field"
                     :modelValue="modelValue[field.name]"
-                    :updateValue="(value: any) => updateField(field.name, value)"
+                    :updateValue="(value: string | number | boolean) => updateField(field.name, value)"
                 >
                     <label
                         v-if="field.label"
@@ -69,7 +69,7 @@
 
                     <UiInput
                         v-if="field.type === 'input'"
-                        :modelValue="modelValue[field.name]"
+                        :modelValue="(modelValue[field.name] as string | number | undefined)"
                         :inputType="field.inputType"
                         :placeholder="field.placeholder"
                         :required="field.required"
@@ -79,7 +79,7 @@
 
                     <UiTextarea
                         v-else-if="field.type === 'textarea'"
-                        :modelValue="modelValue[field.name]"
+                        :modelValue="(modelValue[field.name] as string | undefined)"
                         :placeholder="field.placeholder"
                         :required="field.required"
                         :rows="field.rows"
@@ -88,7 +88,7 @@
 
                     <UiSelect
                         v-else-if="field.type === 'select'"
-                        :modelValue="modelValue[field.name]"
+                        :modelValue="(modelValue[field.name] as string | number | undefined)"
                         :options="field.options"
                         :placeholder="field.placeholder"
                         :required="field.required"
@@ -97,7 +97,7 @@
 
                     <UiCheckbox
                         v-else-if="field.type === 'checkbox'"
-                        :modelValue="modelValue[field.name]"
+                        :modelValue="(modelValue[field.name] as boolean | undefined)"
                         :label="field.checkboxLabel || field.label"
                         @update:modelValue="value => updateField(field.name, value)"
                     />
