@@ -4,6 +4,7 @@ import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
+    base: '/form-generator/',
     plugins: [vue(), vueDevTools()],
     css: {
         preprocessorOptions: {
@@ -16,7 +17,9 @@ export default defineConfig({
         cssCodeSplit: false,
         rollupOptions: {
             output: {
-                assetFileNames: 'assets/styles/[name].[ext]'
+                assetFileNames: 'assets/styles/[name].[hash].[ext]',
+                chunkFileNames: 'assets/js/[name].[hash].js',
+                entryFileNames: 'assets/js/[name].[hash].js',
             }
         },
         minify: 'esbuild',
